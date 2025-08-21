@@ -8,7 +8,11 @@ Fixes:
 
 ## Quick start
 cp .env.sample .env
+
 npm install
+
 npx prisma migrate dev --name init   # or: npx prisma db push
+
 npm run seed
+
 npm run dev
