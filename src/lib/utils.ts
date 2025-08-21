@@ -1,0 +1,1 @@
+export function fmtDate(d: Date){const tz=process.env.TIMEZONE||'America/New_York';try{return d.toLocaleString('en-US',{timeZone:tz});}catch{return d.toLocaleString();}} export function todayKey(d=new Date()){return d.toISOString().split('T')[0];}

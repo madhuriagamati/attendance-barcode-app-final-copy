@@ -1,0 +1,4 @@
+import { prisma } from '@/lib/db';
+export async function GET(_req:Request,{params}:{params:{id:string}}){const s=await prisma.student.findUnique({where:{id:params.id}});if(!s)return new Response('Not found',{status:404});return Response.json(s);} 
+export async function PATCH(req:Request,{params}:{params:{id:string}}){const body=await req.json();try{const s=await prisma.student.update({where:{id:params.id},data:{name:body.name,barcode:body.barcode,email1:body.email1||null,email2:body.email2||null,grade:body.grade||null,active:!!body.active}});return Response.json(s);}catch(e:any){return new Response(e?.message||'Error',{status:400});}} 
+export async function DELETE(_req:Request,{params}:{params:{id:string}}){try{await prisma.attendance.deleteMany({where:{studentId:params.id}});await prisma.student.delete({where:{id:params.id}});return new Response('ok');}catch(e:any){return new Response(e?.message||'Error',{status:400});}}

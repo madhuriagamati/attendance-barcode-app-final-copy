@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base look: high-contrast dark, lots of negative space, crisp typography */
+:root {
+  --bg-start: #0a0a0a;
+  --bg-end: #0f0f12;
+  --text: #e6e6e6;
+  --muted: #9ca3af;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --accent: #0071e3; /* Apple blue */
+}
+
+html, body { height: 100%; background: linear-gradient(180deg, var(--bg-start), var(--bg-end)); color: var(--text); }
+
+@layer base {
+  h1 { @apply tracking-tight; }
+  h2 { @apply tracking-tight; }
+  h3 { @apply tracking-tight; }
+  a { color: var(--accent); }
+  input, select, textarea { color-scheme: dark; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 font-medium transition;
+    background: var(--accent); color: white;
+  }
+  .btn:hover { filter: brightness(1.05); }
+  .btn:active { transform: translateY(0.5px); }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 font-medium transition border;
+    background: transparent; border-color: var(--border); color: var(--text);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.06); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    @apply rounded-2xl p-6 shadow-soft;
+  }
+
+  .input {
+    @apply w-full rounded-xl bg-[rgba(255,255,255,0.06)] border px-4 py-2.5 outline-none transition;
+    border-color: var(--border);
+  }
+  .input:focus { box-shadow: 0 0 0 3px rgba(0,113,227,0.35); border-color: var(--accent); }
+
+  .chip { @apply inline-flex items-center rounded-full px-3 py-1 text-xs; background: rgba(255,255,255,0.07); }
+  .badge { @apply chip; }
+  .table { @apply w-full text-sm; border-collapse: separate; border-spacing: 0; }
+  .table th { @apply text-left text-xs uppercase tracking-wide text-[rgba(255,255,255,0.65)] border-b; border-color: var(--border); padding: 10px 12px; }
+  .table td { @apply border-b; border-color: var(--border); padding: 12px; }
+}

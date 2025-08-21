@@ -1,0 +1,5 @@
+import { prisma } from '@/lib/db';
+import { notFound } from 'next/navigation';
+import EditForm from '@/app/admin/students/[id]/ui/EditForm';;
+import Link from 'next/link';
+export default async function AdminStudentEdit({params}:{params:{id:string}}){const student=await prisma.student.findUnique({where:{id:params.id}});if(!student)return notFound();return(<div className="space-y-4"><h1 className="text-xl font-semibold">Edit Student</h1><EditForm student={{id:student.id,name:student.name,barcode:student.barcode,email1:student.email1,email2:student.email2,grade:student.grade,active:student.active}}/><div className="card space-y-3 max-w-xl"><div className="text-sm text-slate-300">Barcode Preview</div><img src={`/api/barcode/${encodeURIComponent(student.barcode)}`} alt="Student barcode" className="bg-white rounded p-3 max-w-sm"/><div className="flex gap-2"><a className="btn" href={`/api/barcode/${encodeURIComponent(student.barcode)}`} target="_blank">Open PNG</a><Link className="btn" href={`/admin/students/${student.id}/barcode`}>Print Barcode</Link></div></div></div>);} 
